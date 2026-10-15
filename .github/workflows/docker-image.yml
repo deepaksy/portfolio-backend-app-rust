@@ -38,8 +38,9 @@ jobs:
         with:
           context: .
           push: true
-          platforms: linux/amd64,linux/arm64
+          #platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           tags: |
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:latest
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:${{ github.sha }}
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:v1.0.0
+            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:latest
+            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:${{ github.sha }}
+            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:v1.0.0
