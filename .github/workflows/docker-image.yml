@@ -1,0 +1,45 @@
+name: Build and Push to GitLab
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag to build (optional)'
+        required: false
+        default: 'latest'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitLab Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.gitlab.com
+          username: ${{ secrets.GITLAB_REGISTRY_USER }}
+          password: ${{ secrets.GITLAB_REGISTRY_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:latest
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:${{ github.sha }}
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:v1.0.0
