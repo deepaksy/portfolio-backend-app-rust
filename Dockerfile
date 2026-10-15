@@ -6,7 +6,6 @@ WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 RUN cargo build --release
-RUN cargo clean
 RUN rm -rf src
 
 COPY src ./src
