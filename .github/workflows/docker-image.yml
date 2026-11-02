@@ -41,6 +41,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:latest
-            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:${{ github.sha }}
-            registry.gitlab.com/deepaksy1/portfolio-backend-app.git:v1.0.0
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:latest
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:${{ github.sha }}
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:v1.0.0
