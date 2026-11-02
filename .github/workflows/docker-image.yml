@@ -29,7 +29,7 @@ jobs:
         with:
           registry: registry.gitlab.com
           username: ${{ secrets.GITLAB_REGISTRY_USER }}
-          password: ${{ secrets.GITLAB_REGISTRY_PASSWORD }}
+          password: ${{ secrets.GITLAB_REGISTRY_TOKEN }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
@@ -41,6 +41,5 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:latest
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:${{ github.sha }}
-            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust.git:v1.0.0
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:latest
+            registry.gitlab.com/deepaksy1/resource-management-app-backend-rust:${{ github.sha }}
