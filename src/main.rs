@@ -9,7 +9,7 @@ use std::str::FromStr;
 use std::{env, sync::LazyLock};
 // Use the precise nested module path
 use tower_http::compression::CompressionLayer;
-use portfolio_backend_app::models::feedbacks::AppState;
+use portfolio_backend_app::{models::feedbacks::AppState, routes::health::{get_health, get_health_generic}};
 use portfolio_backend_app::routes::feedbacks::{create_feedback, delete_feedback, get_all_feedback, get_feedback_by_id, update_feedback};
 
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
@@ -77,6 +77,7 @@ async fn main() {
                 .put(update_feedback)
                 .delete(delete_feedback),
         )
+        .route("/api/health", get(get_health))
         .layer(CompressionLayer::new().gzip(true))
         .with_state(shared_state);
 
