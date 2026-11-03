@@ -17,6 +17,7 @@ use std::{env, sync::LazyLock};
 use tower_http::{
     compression::CompressionLayer,
     cors::CorsLayer,
+    cors::Any
 };
 
 use portfolio_backend_app::{
@@ -90,12 +91,13 @@ async fn main() {
 
     // CORS configuration
     let cors = CorsLayer::new()
-        .allow_any_origin()
-        // .allow_origin([
-        //     HeaderValue::from_static("http://localhost:4321"),
-        //     HeaderValue::from_static("https://iamengineer.in"),
-        //     HeaderValue::from_static("https://www.iamengineer.in"),
-        // ])
+        // .allow_origin(Any)
+        .allow_origin([
+            HeaderValue::from_static("http://localhost:4321"),
+            HeaderValue::from_static("https://iamengineer.in"),
+            HeaderValue::from_static("https://www.iamengineer.in"),
+            HeaderValue::from_static("*")
+        ])
         .allow_methods([
             Method::GET,
             Method::POST,
