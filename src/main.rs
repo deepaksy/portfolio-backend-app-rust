@@ -91,13 +91,13 @@ async fn main() {
 
     // CORS configuration
     let cors = CorsLayer::new()
-        // .allow_origin(Any)
-        .allow_origin([
-            HeaderValue::from_static("http://localhost:4321"),
-            HeaderValue::from_static("https://iamengineer.in"),
-            HeaderValue::from_static("https://www.iamengineer.in"),
-            HeaderValue::from_static("*")
-        ])
+        .allow_origin(Any)
+        // .allow_origin([
+        //     HeaderValue::from_static("http://localhost:4321"),
+        //     HeaderValue::from_static("https://iamengineer.in"),
+        //     HeaderValue::from_static("https://www.iamengineer.in"),
+        //     HeaderValue::from_static("*")
+        // ])
         .allow_methods([
             Method::GET,
             Method::POST,
@@ -110,7 +110,8 @@ async fn main() {
             CONTENT_TYPE,
             AUTHORIZATION,
         ])
-        .allow_credentials(true);
+        // .allow_credentials(true);
+        .allow_credentials(false);
 
     let app = Router::new()
         .route("/api/feedback", post(create_feedback).get(get_all_feedback))
